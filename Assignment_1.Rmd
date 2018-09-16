@@ -2,42 +2,52 @@
 title: "MA615_Assignment_1"
 author: "Chaoqun Yin"
 date: "9/16/2018"
-output: pdf_document
+output:
+  pdf_document: default
+  html_document:
+    df_print: paged
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+## 1 Calculate the probability
+**Base the information in the assignment, this is a possion distribution called M. And the lambda is 2, k is the misprints in a page ranging from 0 to 10. Therefore the probability that k misprints occur is $P(M > k) = 1 - P(M \leq k) =$ 1 - ppois($k$, lambda = 2). The following table shows the p.d.f of M as dprob, the C.D.F of M as cprob and the probability of $P(M > k)$ as tailprob.**
+
 
 ```{r}
 k = 0
-result = matrix(character(), nrow = 0, ncol = 4, byrow = TRUE)
+result1 = matrix(character(), nrow = 0, ncol = 4, byrow = TRUE)
 for (k in 0:10){
   dprob = dpois(k, lambda = 2)
   cprob = ppois(k, lambda = 2)
   tailprob = 1 - ppois(k, lambda = 2)
-  result = rbind(result, c(k, dprob, cprob, tailprob))
+  result1 = rbind(result1, c(k, dprob, cprob, tailprob))
   next
 }
-colnames(result) <- c("k","prob","cprob","tailprob")
-View(result)
+colnames(result1) <- c("k","prob","cprob","tailprob")
+print(result1)
 ```
 
+## 2 The full table of n x k
+**First, we should caculate the probability that among 50 pages n pages have the k misprints. The probability is $P(T \leq n) =$ pbinom($n$, 50, $P_k$).**
 
 ```{r}
 k = 10
 n = 50
-result = matrix(character(), nrow = 10, ncol = 50)
+result2 = matrix(character(), nrow = 10, ncol = 50)
 for (n in 1:50){
   for (k in 1:10){
-    result[k,n] = pbinom(n ,50, dpois(k, lambda = 2))
+    result2[k,n] = pbinom(n ,50, 1 - ppois(k, lambda = 2))
     next
   }
 }
+print(result2)
 ```
 
-```{r pressure, echo=FALSE, fig.cap="Book", out.width = '100%'}
-knitr::include_graphics(rep("images/knit-logo.png"))
-```
+## 3 The book is here
+
+![All statistics magic and secrets are in the book.](/Users/tanfox/Documents/Git/MA615_Assignment_1/book.jpg) 
+
 
