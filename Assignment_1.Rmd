@@ -1,0 +1,43 @@
+---
+title: "MA615_Assignment_1"
+author: "Chaoqun Yin"
+date: "9/16/2018"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r}
+k = 0
+result = matrix(character(), nrow = 0, ncol = 4, byrow = TRUE)
+for (k in 0:10){
+  dprob = dpois(k, lambda = 2)
+  cprob = ppois(k, lambda = 2)
+  tailprob = 1 - ppois(k, lambda = 2)
+  result = rbind(result, c(k, dprob, cprob, tailprob))
+  next
+}
+colnames(result) <- c("k","prob","cprob","tailprob")
+View(result)
+```
+
+
+```{r}
+k = 10
+n = 50
+result = matrix(character(), nrow = 10, ncol = 50)
+for (n in 1:50){
+  for (k in 1:10){
+    result[k,n] = pbinom(n ,50, dpois(k, lambda = 2))
+    next
+  }
+}
+```
+
+```{r pressure, echo=FALSE, fig.cap="Book", out.width = '100%'}
+knitr::include_graphics(rep("images/knit-logo.png"))
+```
+
