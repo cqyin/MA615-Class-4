@@ -48,6 +48,6 @@ print(result2)
 
 ## 3 The book is here
 
-![All statistics magic and secrets are in the book.](/Users/tanfox/Documents/Git/MA615_Assignment_1/book.jpg) 
+![All statistics magic and secrets are in the book.](book.jpg) 
 
 
