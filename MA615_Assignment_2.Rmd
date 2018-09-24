@@ -1,0 +1,63 @@
+---
+title: "MA615_Assignment_2"
+author: "Chaoqun Yin"
+date: "9/21/2018"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, include = FALSE}
+library(tidyverse)
+```
+
+#R4DS Exercises
+
+###3.5.1.2. What do the empty cells in plot with facet_grid(drv ~ cyl) mean? How do they relate to this plot?
+```{r}
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy)) + 
+  facet_grid(drv ~ cyl)
+
+```
+It means there is no valid data meeting the requirement of drv and cyl, that is, the number of cylinders and the way of driven. "
+In this way, we can divide the data into specific groups with specific factors so we can compare the correlation of variables better."
+
+###3.5.1.3. What plots does the following code make? What does . do?
+```{r}
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy)) +
+  facet_grid(drv ~ .)
+
+```
+The plot adds the third variable the way of driven on the row.
+```{r}
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy)) +
+  facet_grid(. ~ cyl)
+
+```
+The plot adds the third variable the number of cylinders on the column.
+
+
+#Rewrite the shiny app
+###Lake Huron
+```{r}
+#Load the data of Lake Huron
+LakeHuron <- data.frame("year" = 1875:1972, "level" = LakeHuron)
+#Plot broken line
+ggplot(data = LakeHuron, aes(x <- year, y <- level)) +
+  geom_line()
+#Add smooth line
+ggplot(data = LakeHuron, aes(x <- year, y <- level)) +
+  geom_point() +
+  geom_line() +
+  geom_smooth()
+
+```
+
+
